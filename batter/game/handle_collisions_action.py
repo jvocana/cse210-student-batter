@@ -42,19 +42,28 @@ class HandleCollisionsAction(Action):
         # if the ball hits a brick, reverse its direction
         
             
-            # if ball_position.get_y() == brick_position.get_y() - 1:
-            #     if ball_position.get_x() == brick_position.get_x() - 1:
-            #         new_velocity = ball.get_velocity().reverse()
-            #         ball.set_velocity(new_velocity)
+        if ball_position == brick_position:
+            new_velocity = ball.get_velocity().reverse()
+            #remove the brick
+            
        
-        # if the ball hits the sides, have it bounce
-        # if ball_position.get_x() == (constants.MAX_X - 1) or ball_position.get_x() == 1 or ball_position.get_y() == 1:
-        #     new_y = ball.get_velocity().get_y()
-        #     x = ball.get_velocity().reverse()
-        #     new_x = x.get_x()
-        #     ball.set_velocity(Point(x = new_x, y = new_y))
+        # if statements for collision with the walls       
+        #if the ball hits the sides, have it bounce
+        if ball_position.get_x() == constants.MAX_X - 1:
+            new_velocity = ball.get_velocity().reverse()
+            return ball.set_velocity(new_velocity)
         
+        if ball_position.get_x() == 1:
+            new_velocity = ball.get_velocity().reverse()
+            return ball.set_velocity(new_velocity)
+            
+        if ball_position.get_y() == 1:
+            new_velocity = ball.get_velocity().reverse()
+            return ball.set_velocity(new_velocity)
+            
+            
         # if the ball goes off screen on the bottom, then game over
         if ball_position.get_y() == constants.MAX_Y - 1:
             sys.exit()
+        
             
