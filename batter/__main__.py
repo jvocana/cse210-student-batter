@@ -25,6 +25,7 @@ def main(screen):
     cast["paddle"] = [paddle]
 
     cast["brick"] = []
+    brick_coordinates = []
     for x in range(5, 75):
         for y in range(2, 6):
             position = Point(x, y)
@@ -32,6 +33,8 @@ def main(screen):
             brick.set_text("*")
             brick.set_position(position)
             cast["brick"].append(brick)
+            brick_coordinates.append(position)
+            
 
     x = int(constants.MAX_X / 2)
     y = int(constants.MAX_Y / 2)

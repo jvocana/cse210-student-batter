@@ -41,25 +41,44 @@ class HandleCollisionsAction(Action):
         
         # if the ball hits a brick, reverse its direction
         
+        for x in cast['brick']:   
+            brick_x = x.get_position().get_x()
+            brick_y = x.get_position().get_y()
+
+            if ball_position.get_x() == brick_x and ball_position.get_y() == brick_y:
+                x_point = ball.get_velocity().get_x()
+                y = ball.get_velocity().get_y()
+                new_velocity = Point(x_point, abs(y))
+                ball.set_velocity(new_velocity)
+                #remove the brick
+                cast['brick'].remove(x)
+                return ball.set_velocity(new_velocity)
             
-        if ball_position == brick_position:
-            new_velocity = ball.get_velocity().reverse()
-            #remove the brick
             
        
         # if statements for collision with the walls       
         #if the ball hits the sides, have it bounce
-        if ball_position.get_x() == constants.MAX_X - 1:
-            new_velocity = ball.get_velocity().reverse()
-            return ball.set_velocity(new_velocity)
         
+        # if the ball hits right side
+        if ball_position.get_x() == constants.MAX_X - 1:
+            x = ball.get_velocity().get_x()
+            y = ball.get_velocity().get_y()
+            new_velocity = Point(-abs(x), y)
+            ball.set_velocity(new_velocity)
+        
+        # if the ball hits the left side
         if ball_position.get_x() == 1:
-            new_velocity = ball.get_velocity().reverse()
-            return ball.set_velocity(new_velocity)
-            
+            x = ball.get_velocity().get_x()
+            y = ball.get_velocity().get_y()
+            new_velocity = Point(abs(x), y)
+            ball.set_velocity(new_velocity)
+
+        # if the ball hits the top   
         if ball_position.get_y() == 1:
-            new_velocity = ball.get_velocity().reverse()
-            return ball.set_velocity(new_velocity)
+            x = ball.get_velocity().get_x()
+            y = ball.get_velocity().get_y()
+            new_velocity = Point(x, abs(y))
+            ball.set_velocity(new_velocity)
             
             
         # if the ball goes off screen on the bottom, then game over
